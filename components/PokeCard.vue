@@ -53,7 +53,8 @@ export default {
 
 <style lang="scss" scoped>
 .card {
-  max-width: 400px;
+  max-width: 600px;
+  width: 100%;
   max-height: 600px;
   header {
     display: flex;

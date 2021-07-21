@@ -1,7 +1,7 @@
 <template>
   <div>
     <NavBar />
-    <Nuxt class="body" />
+    <Nuxt />
   </div>
 </template>
 
@@ -10,8 +10,5 @@
 <style lang="scss" scoped>
 * {
   font-family: Roboto;
-}
-.body {
-  margin-top: 70px;
 }
 </style>

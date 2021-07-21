@@ -14,27 +14,7 @@
   </div>
 </template>
 
-<script>
-export default {
-  //   data() {
-  //     return {
-  //       width: 0,
-  //     }
-  //   },
-  //   created() {
-  //     window.addEventListener('resize', this.sizeDefine)
-  //   },
-  //   destroyed() {
-  //     window.removeEventListener('resize', this.sizeDefine)
-  //   },
-  //   methods: {
-  //     sizeDefine() {
-  //       this.width = window.innerWidth
-  //       console.log(this.width)
-  //     },
-  //   },
-}
-</script>
+<script></script>
 
 <style lang="scss" scoped>
 @media (max-width: 343px) {
@@ -47,9 +27,9 @@ export default {
   border-bottom: 1px solid var(--line);
   height: 50px;
   width: 100%;
-  position: fixed;
+  /* position: fixed;
   top: 0;
-  z-index: 101;
+  z-index: 101; */
   background-color: var(--primary);
   .navBar {
     margin: 5px auto;

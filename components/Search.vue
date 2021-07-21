@@ -1,15 +1,33 @@
 <template>
   <div class="inputGroup">
     <uil-search size="13px" class="logo" color="var(--linedark)" />
-    <input class="input" type="text" placeholder="Pesquisar" />
+    <input
+      class="input"
+      id="search"
+      type="text"
+      placeholder="Pesquisar"
+      v-model="value"
+      @change="inputChange()"
+    />
   </div>
 </template>
 
 <script>
 import { UilSearch } from '@iconscout/vue-unicons'
+
 export default {
   components: {
     UilSearch,
+  },
+  data() {
+    return {
+      value: '',
+    }
+  },
+  methods: {
+    inputChange() {
+      this.$store.commit('search/set', this.value)
+    },
   },
 }
 </script>
