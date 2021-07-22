@@ -12,7 +12,7 @@
     <img :src="photo" alt="" />
     <footer>
       <div class="types" v-for="type in types" :key="type.slot">
-        <Type class="type" :img="type.type.name" size="40" />
+        <Type class="type" :pokeType="type.type.name" size="40" />
       </div>
     </footer>
   </div>
@@ -22,7 +22,7 @@
 export default {
   props: {
     pokemon: {
-      require: true,
+      required: true,
       type: String,
     },
   },
@@ -43,7 +43,12 @@ export default {
       const pokemon = await this.$axios.$get(`/pokemon/` + this.pokemon)
       this.id = pokemon.id
       this.name = pokemon.name
-      this.photo = pokemon.sprites.other['official-artwork'].front_default
+      const defaultPhoto = require('../assets/image/MissingNo.png')
+      if (pokemon.sprites.other['official-artwork'].front_default != null) {
+        this.photo = pokemon.sprites.other['official-artwork'].front_default
+      } else {
+        this.photo = defaultPhoto
+      }
       this.sprite = pokemon.sprites.front_default
       this.types = pokemon.types
     },
@@ -80,6 +85,7 @@ export default {
     }
   }
   img {
+    max-width: 475px;
     width: 100%;
   }
   footer {

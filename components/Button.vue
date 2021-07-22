@@ -30,7 +30,6 @@ export default {
     },
     type: String,
     label: {
-      require: true,
       type: String,
     },
     styleButton: String,

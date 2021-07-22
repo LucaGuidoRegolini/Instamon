@@ -1,19 +1,22 @@
 <template>
   <div>
-    <div v-show="pokemons.length == 0" class="box">
-      <img src="../assets/image/icon.png" alt="" class="image" />
-      <p class="text">
-        parece que não encontramos nenhum pokemon com esse nome <br />
-        não se preocupe com certeza daqui a pouco inventarão um chamado assim
-        <br />
-        mas até lá, por quê não tenta outro nome?
-      </p>
+    <Loading v-show="loading" class="loading" />
+    <div v-show="!loading">
+      <div v-show="pokemons.length == 0" class="box">
+        <img src="../assets/image/icon.png" alt="" class="image" />
+        <p class="text">
+          parece que não encontramos nenhum pokemon com esse nome <br />
+          não se preocupe com certeza daqui a pouco inventarão um chamado assim
+          <br />
+          mas até lá, por quê não tenta outro nome?
+        </p>
+      </div>
+      <ul class="box" id="infinite-list">
+        <li v-for="pokemon in pokemons" :key="pokemon.name">
+          <PokeCard class="pokecard" :pokemon="pokemon.name" />
+        </li>
+      </ul>
     </div>
-    <ul class="box" id="infinite-list">
-      <li v-for="pokemon in pokemons" :key="pokemon.name">
-        <PokeCard class="pokecard" :pokemon="pokemon.name" />
-      </li>
-    </ul>
   </div>
 </template>
 
@@ -26,6 +29,7 @@ export default {
   },
   data() {
     return {
+      loading: true,
       pokemons: [],
       lastItem: 0,
       searchTerm: '',
@@ -38,12 +42,18 @@ export default {
   },
   watch: {
     searchString(newCount, oldCount) {
-      this.search(newCount)
+      this.loading = true
+      this.search(newCount).then(() => {
+        setTimeout(() => {
+          this.loading = false
+        }, 1000)
+      })
     },
   },
-  created() {},
   mounted() {
     this.addInfinitScroll()
+    this.search(this.$store.state.search.searchString)
+    //this.search()
   },
   methods: {
     async PokemonDetails() {
@@ -65,8 +75,13 @@ export default {
       this.lastItem = 0
       this.pokemons = []
       const listElm = document.querySelector('#infinite-list')
+      this.loading = true
+      this.PokemonDetails().then(() => {
+        setTimeout(() => {
+          this.loading = false
+        }, 1000)
+      })
 
-      this.PokemonDetails()
       listElm.addEventListener('scroll', this.infiniScroll)
     },
 
@@ -78,7 +93,6 @@ export default {
     },
 
     async search(value) {
-      const pokemonAll = await this.$axios.$get('/pokemon?limit=2000&offset=0')
       let reslt = []
       if (value == '') {
         this.addInfinitScroll()
@@ -86,9 +100,10 @@ export default {
         return
       } else {
         this.delInfinitScroll()
+
         this.searchTerm = `- ${value}`
       }
-
+      const pokemonAll = await this.$axios.$get('/pokemon?limit=2000&offset=0')
       for (let id in pokemonAll.results) {
         const pokeName = pokemonAll.results[id].name
         let resp = pokeName.indexOf(value)

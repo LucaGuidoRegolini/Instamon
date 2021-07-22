@@ -5,7 +5,21 @@
   </div>
 </template>
 
-<script></script>
+<script>
+export default {
+  computed: {
+    searchString() {
+      return this.$store.state.search.searchString
+    },
+  },
+  watch: {
+    searchString(newCount, oldCount) {
+      console.log('foi')
+      this.$router.push('/')
+    },
+  },
+}
+</script>
 
 <style lang="scss" scoped>
 * {
