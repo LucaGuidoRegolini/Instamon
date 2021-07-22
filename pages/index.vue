@@ -1,5 +1,14 @@
 <template>
   <div>
+    <div v-show="pokemons.length == 0" class="box">
+      <img src="../assets/image/icon.png" alt="" class="image" />
+      <p class="text">
+        parece que não encontramos nenhum pokemon com esse nome <br />
+        não se preocupe com certeza daqui a pouco inventarão um chamado assim
+        <br />
+        mas até lá, por quê não tenta outro nome?
+      </p>
+    </div>
     <ul class="box" id="infinite-list">
       <li v-for="pokemon in pokemons" :key="pokemon.name">
         <PokeCard class="pokecard" :pokemon="pokemon.name" />
@@ -10,10 +19,16 @@
 
 <script>
 export default {
+  head() {
+    return {
+      title: `Instamon ${this.searchTerm}`,
+    }
+  },
   data() {
     return {
       pokemons: [],
       lastItem: 0,
+      searchTerm: '',
     }
   },
   computed: {
@@ -23,13 +38,12 @@ export default {
   },
   watch: {
     searchString(newCount, oldCount) {
-      this.search(this.$store.state.search.searchString)
+      this.search(newCount)
     },
   },
   created() {},
   mounted() {
     this.addInfinitScroll()
-    //this.delInfinitScroll()
   },
   methods: {
     async PokemonDetails() {
@@ -63,19 +77,21 @@ export default {
       listElm.removeEventListener('scroll', this.infiniScroll)
     },
 
-    async search(valor) {
+    async search(value) {
       const pokemonAll = await this.$axios.$get('/pokemon?limit=2000&offset=0')
       let reslt = []
-      if (valor == '') {
+      if (value == '') {
         this.addInfinitScroll()
+        this.searchTerm = ''
         return
       } else {
         this.delInfinitScroll()
+        this.searchTerm = `- ${value}`
       }
 
       for (let id in pokemonAll.results) {
         const pokeName = pokemonAll.results[id].name
-        let resp = pokeName.indexOf(valor)
+        let resp = pokeName.indexOf(value)
         this.pokemons = []
         if (resp == 0) {
           reslt.push(pokemonAll.results[id])
@@ -108,6 +124,15 @@ export default {
     bottom: 0px;
   }
 }
+
+.image {
+  width: 120px;
+}
+.text {
+  text-align: center;
+  color: var(--linedark);
+}
+
 div {
   .box {
     background-color: var(--primarydark);
