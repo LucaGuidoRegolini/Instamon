@@ -8,13 +8,12 @@
 <script>
 export default {
   computed: {
-    searchString() {
-      return this.$store.state.search.searchString
+    searchCount() {
+      return this.$store.getters['search/getCont']
     },
   },
   watch: {
-    searchString(newCount, oldCount) {
-      console.log('foi')
+    searchCount() {
       this.$router.push('/')
     },
   },

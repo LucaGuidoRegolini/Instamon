@@ -26,7 +26,9 @@ export default {
   },
   methods: {
     inputChange() {
+      console.log('foi')
       this.$store.commit('search/set', this.value)
+      this.value = ''
     },
   },
 }

@@ -1,7 +1,7 @@
 <template>
   <div class="body">
     <img src="../assets/image/icon.png" alt="" class="icon" />
-    <h1 class="text">Carregando...</h1>
+    <h1 class="text">Loading...</h1>
   </div>
 </template>
 

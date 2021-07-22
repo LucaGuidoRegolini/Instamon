@@ -13,7 +13,9 @@
       </div>
       <ul class="box" id="infinite-list">
         <li v-for="pokemon in pokemons" :key="pokemon.name">
-          <PokeCard class="pokecard" :pokemon="pokemon.name" />
+          <nuxt-link :to="pokemon.name"
+            ><PokeCard class="pokecard" :pokemon="pokemon.name"
+          /></nuxt-link>
         </li>
       </ul>
     </div>
@@ -37,7 +39,7 @@ export default {
   },
   computed: {
     searchString() {
-      return this.$store.state.search.searchString
+      return this.$store.getters['search/getValue']
     },
   },
   watch: {
@@ -51,9 +53,13 @@ export default {
     },
   },
   mounted() {
-    this.addInfinitScroll()
-    this.search(this.$store.state.search.searchString)
-    //this.search()
+    this.loading = true
+    //this.$store.state.search.searchString
+    this.search(this.$store.getters['search/getValue']).then(() => {
+      setTimeout(() => {
+        this.loading = false
+      }, 1000)
+    })
   },
   methods: {
     async PokemonDetails() {

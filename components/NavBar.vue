@@ -1,9 +1,11 @@
 <template>
   <div class="content">
     <nav class="navBar">
-      <div class="logo">
-        <h1>Instamon</h1>
-      </div>
+      <nuxt-link to="/">
+        <div class="logo">
+          <h1>Instamon</h1>
+        </div>
+      </nuxt-link>
       <div class="main">
         <div class="search">
           <Search />

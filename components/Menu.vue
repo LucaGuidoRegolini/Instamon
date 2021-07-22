@@ -1,8 +1,11 @@
 <template>
   <div class="menu">
-    <Button :image="true" styleButton="menu">
-      <uil-estate size="22px" class="logo" color="black" />
-    </Button>
+    <nuxt-link to="/">
+      <Button :image="true" styleButton="menu">
+        <uil-estate size="22px" class="logo" color="black" />
+      </Button>
+    </nuxt-link>
+
     <Button :image="true" styleButton="menu">
       <uil-heart size="22px" class="logo" color="black" />
     </Button>

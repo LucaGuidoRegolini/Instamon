@@ -11,6 +11,15 @@
           :pokeType="type.type.name"
           size="40"
         />
+        <div class="space"></div>
+        <FavIcon
+          @add="addPokemonFav()"
+          @delete="deletePokemonFav()"
+          :defaultMode="fav"
+        />
+      </div>
+      <div class="name">
+        <h1 class="title">{{ name }}</h1>
       </div>
       <p>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
@@ -79,14 +88,10 @@
 <script>
 import typeColor from '../utils/typeColor'
 export default {
-  // props: {
-  //     require: true,
-  //     //type: String,
-  //   },
-  // },
   data() {
     return {
       loading: true,
+      fav: false,
       pokemon: this.$route.params.name,
       color: '#a0a29f',
       id: '',
@@ -99,6 +104,7 @@ export default {
   mounted() {
     this.PokemonDetails().then(() => {
       this.typeColor()
+      this.checkFav()
       setTimeout(() => {
         this.loading = false
       }, 1500)
@@ -117,6 +123,19 @@ export default {
     typeColor() {
       this.color = typeColor(this.types[0].type.name)
     },
+    checkFav() {
+      const Allpokemon = this.$store.getters['favList/getList']
+      const pokemon = Allpokemon[this.name]
+      if (pokemon != undefined) {
+        this.fav = true
+      }
+    },
+    addPokemonFav() {
+      this.$store.commit('favList/add', { id: this.id, name: this.name })
+    },
+    deletePokemonFav() {
+      this.$store.commit('favList/delete', this.name)
+    },
   },
 }
 </script>
@@ -134,14 +153,19 @@ export default {
     width: 100%;
     max-width: 600px;
     margin-top: 00px;
-    border-radius: 10px;
     z-index: 2;
     .types {
       margin: -45px 5px 0;
       display: flex;
+      align-items: center;
       .type {
         margin: 5px;
       }
+    }
+    .name {
+      text-align: center;
+      margin: 10px 0;
+      border-bottom: 1px solid var(--linedark);
     }
   }
 }
