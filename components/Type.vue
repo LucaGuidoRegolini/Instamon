@@ -1,6 +1,9 @@
 <template>
-  <div class="box" :style="'width: ' + size + 'px'">
-    <div :style="'background:' + color" class="icon">
+  <div class="box" :style="`width:${size}px`">
+    <div
+      :style="`background:${color};width:${size}px;height:${size}px`"
+      class="icon"
+    >
       <img :src="require(`../assets/svgs/${pokeType}.svg`)" />
     </div>
   </div>
@@ -16,7 +19,7 @@ export default {
     },
     size: {
       type: String,
-      default: 40,
+      default: '40',
     },
   },
   data() {
@@ -38,20 +41,10 @@ export default {
 <style lang="scss" scoped>
 .icon {
   border-radius: 100%;
-  height: 100%;
-  width: 100%;
-  transition: 200ms all;
-}
-
-/* .icon:hover {
-  filter: saturate(200%);
-  transform: scale(1.1);
-  cursor: pointer;
-} */
-
-.icon img {
-  height: 60%;
-  width: 60%;
-  margin: 20%;
+  img {
+    height: 60%;
+    width: 60%;
+    margin: 20%;
+  }
 }
 </style>

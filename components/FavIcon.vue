@@ -92,7 +92,6 @@ export default {
   box-shadow: 0px 0px 8px 1px var(--linedark);
   transition: 200ms all;
   &:hover {
-    //filter: saturate(200%);
     transform: scale(1.1);
     cursor: pointer;
     animation: raiseIcon 0.5s;

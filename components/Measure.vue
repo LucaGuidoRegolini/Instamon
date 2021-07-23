@@ -51,11 +51,9 @@ export default {
 
   methods: {
     kgforLbs(weight) {
-      console.log(weight * 2.535)
       return (weight * 2.20462).toFixed(2)
     },
     MforIn(heigh) {
-      console.log(heigh * 39.3701)
       return (heigh * 39.3701).toFixed(2)
     },
   },
