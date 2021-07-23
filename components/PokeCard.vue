@@ -11,8 +11,16 @@
     </header>
     <img :src="photo" alt="" />
     <footer>
-      <div class="types" v-for="type in types" :key="type.slot">
-        <Type class="type" :pokeType="type.type.name" size="40" />
+      <div class="types">
+        <Type
+          class="type"
+          v-for="type in types"
+          :key="type.slot"
+          :pokeType="type.type.name"
+          size="40"
+        />
+        <div class="space"></div>
+        <FavIcon :defaultMode="fav" />
       </div>
     </footer>
   </div>
@@ -28,6 +36,7 @@ export default {
   },
   data() {
     return {
+      fav: false,
       id: '',
       name: '',
       photo: '',
@@ -36,8 +45,11 @@ export default {
     }
   },
   created() {
-    this.PokemonDetails()
+    this.PokemonDetails().then(() => {
+      this.checkFav()
+    })
   },
+  mounted() {},
   methods: {
     async PokemonDetails() {
       const pokemon = await this.$axios.$get(`/pokemon/` + this.pokemon)
@@ -51,6 +63,13 @@ export default {
       }
       this.sprite = pokemon.sprites.front_default
       this.types = pokemon.types
+    },
+    checkFav() {
+      const Allpokemon = this.$store.getters['favList/getList']
+      const pokemon = Allpokemon[this.name]
+      if (pokemon != undefined) {
+        this.fav = true
+      }
     },
   },
 }
@@ -96,6 +115,8 @@ export default {
     padding: 0 5px;
     .types {
       display: flex;
+      align-items: center;
+      width: 100%;
       .type {
         margin: 5px;
       }

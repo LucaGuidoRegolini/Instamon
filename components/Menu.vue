@@ -6,9 +6,11 @@
       </Button>
     </nuxt-link>
 
-    <Button :image="true" styleButton="menu">
-      <uil-heart size="22px" class="logo" color="black" />
-    </Button>
+    <nuxt-link to="/favlist">
+      <Button :image="true" styleButton="menu">
+        <uil-heart size="22px" class="logo" color="black" />
+      </Button>
+    </nuxt-link>
   </div>
 </template>
 

@@ -4,9 +4,9 @@
     :style="'width: ' + size + 'px; height: ' + size + 'px'"
     @click="changeMode()"
   >
-    <div :style="'background:' + color" class="icon">
-      <img v-if="!mode" :src="require(`../assets/image/heart1.png`)" />
-      <img v-else :src="require(`../assets/image/heart2.png`)" />
+    <div :style="'background:' + color" class="icon" id="button">
+      <img v-show="!mode" :src="require(`../assets/image/heart1.png`)" />
+      <img v-show="mode" :src="require(`../assets/image/heart2.png`)" />
     </div>
   </div>
 </template>
@@ -22,6 +22,10 @@ export default {
       type: String,
       default: '40',
     },
+    float: {
+      type: Boolean,
+      default: false,
+    },
     defaultMode: {
       type: Boolean,
       default: false,
@@ -32,6 +36,13 @@ export default {
       mode: this.defaultMode,
     }
   },
+  mounted() {
+    setTimeout(() => {
+      this.mode = this.defaultMode
+    }, 20)
+
+    this.floatButton()
+  },
   methods: {
     changeMode() {
       this.mode = !this.mode
@@ -39,6 +50,13 @@ export default {
         this.$emit('add')
       } else {
         this.$emit('delete')
+      }
+    },
+    floatButton() {
+      if (this.float) {
+        //teste
+        const elemento = document.getElementById('button')
+        elemento.classList.add('floatIcon')
       }
     },
   },
@@ -62,14 +80,10 @@ export default {
     box-shadow: 0px 0px 8px 1px var(--linedark);
   }
 }
-.icon {
+
+.floatIcon {
   border-radius: 100%;
   border: 1px solid var(--linedark);
-  height: 100%;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   box-shadow: 0px 0px 8px 1px var(--linedark);
   transition: 200ms all;
   &:hover {
@@ -83,6 +97,18 @@ export default {
     animation: downIcon 0.5s;
     animation-fill-mode: both;
   }
+}
+
+.icon {
+  //border-radius: 100%;
+  //border: 1px solid var(--linedark);
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  //box-shadow: 0px 0px 8px 1px var(--linedark);
+  //transition: 200ms all;
 
   img {
     height: 70%;

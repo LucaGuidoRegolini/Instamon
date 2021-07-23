@@ -2,7 +2,7 @@
   <div>
     <Loading v-show="loading" class="loading" />
     <div v-show="!loading">
-      <div v-show="pokemons.length == 0" class="box">
+      <div v-show="pokemons == undefined" class="box">
         <img src="../assets/image/icon.png" alt="" class="image" />
         <p class="text">
           parece que não encontramos nenhum pokemon com esse nome <br />
@@ -24,100 +24,42 @@
 
 <script>
 export default {
-  head() {
-    return {
-      title: `Instamon ${this.searchTerm}`,
-    }
-  },
   data() {
     return {
       loading: true,
       pokemons: [],
-      lastItem: 0,
-      searchTerm: '',
     }
   },
   computed: {
-    searchString() {
-      return this.$store.getters['search/getValue']
+    saerchFavPokemon() {
+      return this.$store.getters['favlist/getList']
     },
   },
   watch: {
-    searchString(newCount, oldCount) {
+    saerchFavPokemon(newCount, oldCount) {
       this.loading = true
-      this.search(newCount).then(() => {
-        setTimeout(() => {
-          this.loading = false
-        }, 1000)
-      })
+      this.loading = false
     },
   },
   mounted() {
     this.loading = true
-    this.search(this.$store.getters['search/getValue']).then(() => {
+    this.PokemonFavDetails().then(() => {
       setTimeout(() => {
         this.loading = false
       }, 1000)
     })
+    this.infiniScroll()
   },
   methods: {
-    async PokemonDetails() {
-      const pokemons = await this.$axios.$get(
-        `/pokemon?limit=10&offset=` + this.lastItem
-      )
-      this.lastItem += 10
-      this.pokemons = this.pokemons.concat(pokemons.results)
+    async PokemonFavDetails() {
+      this.pokemons = this.$store.getters['favList/getList']
     },
 
     infiniScroll() {
       const listElm = document.querySelector('#infinite-list')
       if (listElm.scrollTop + listElm.clientHeight >= listElm.scrollHeight) {
-        this.PokemonDetails()
+        this.PokemonFavDetails()
       }
-    },
-
-    addInfinitScroll() {
-      this.lastItem = 0
-      this.pokemons = []
-      const listElm = document.querySelector('#infinite-list')
-      this.loading = true
-      this.PokemonDetails().then(() => {
-        setTimeout(() => {
-          this.loading = false
-        }, 1000)
-      })
-
-      listElm.addEventListener('scroll', this.infiniScroll)
-    },
-
-    delInfinitScroll() {
-      this.lastItem = 0
-      this.pokemons = []
-      const listElm = document.querySelector('#infinite-list')
-      listElm.removeEventListener('scroll', this.infiniScroll)
-    },
-
-    async search(value) {
-      let reslt = []
-      if (value == '') {
-        this.addInfinitScroll()
-        this.searchTerm = ''
-        return
-      } else {
-        this.delInfinitScroll()
-
-        this.searchTerm = `- ${value}`
-      }
-      const pokemonAll = await this.$axios.$get('/pokemon?limit=2000&offset=0')
-      for (let id in pokemonAll.results) {
-        const pokeName = pokemonAll.results[id].name
-        let resp = pokeName.indexOf(value)
-        this.pokemons = []
-        if (resp == 0) {
-          reslt.push(pokemonAll.results[id])
-        }
-      }
-      this.pokemons = reslt
     },
   },
 }

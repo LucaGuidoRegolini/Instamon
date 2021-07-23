@@ -7,7 +7,8 @@
       type="text"
       placeholder="Pesquisar"
       v-model="value"
-      @change="inputChange()"
+      @blur="inputFocus()"
+      @keyup.enter="inputEnter()"
     />
   </div>
 </template>
@@ -25,10 +26,12 @@ export default {
     }
   },
   methods: {
-    inputChange() {
-      console.log('foi')
+    inputFocus() {
       this.$store.commit('search/set', this.value)
       this.value = ''
+    },
+    inputEnter() {
+      this.$store.commit('search/set', this.value)
     },
   },
 }

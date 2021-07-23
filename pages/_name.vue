@@ -16,6 +16,7 @@
           @add="addPokemonFav()"
           @delete="deletePokemonFav()"
           :defaultMode="fav"
+          :float="true"
         />
       </div>
       <div class="name">
