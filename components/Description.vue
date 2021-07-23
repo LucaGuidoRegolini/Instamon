@@ -23,7 +23,11 @@ export default {
   methods: {
     async specieData(specie) {
       const specieData = await this.$axios.$get(specie.url)
-      const description = specieData.flavor_text_entries[0].flavor_text
+      let i = 0
+      while (specieData.flavor_text_entries[i].language.name != 'en') i++
+
+      const description = specieData.flavor_text_entries[i].flavor_text
+
       console.log(description)
       this.description = description.replace('\f', ' ')
     },

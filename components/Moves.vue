@@ -8,7 +8,12 @@
         </h3>
         <div class="types">
           <Type class="type" :pokeType="move.type" size="40" />
-          <p class="pp">PP:{{ move.pp }}</p>
+          <div class="details">
+            <p class="pp">PP:{{ move.pp }}</p>
+            <p v-show="move.power != null" class="power">
+              Power:{{ move.power }}
+            </p>
+          </div>
         </div>
       </div>
       <div class="padding"></div>
@@ -41,12 +46,13 @@ export default {
         const moveData = await this.$axios.$get(url)
         const type = moveData.type.name
         const pp = moveData.pp
+        const power = moveData.power
         const i = 0
         while (moveData.effect_entries[i].language.name != 'en') i++
 
         const effect_Entries = moveData.effect_entries[i].effect
 
-        this.movesDatas.push({ name, url, pp, type, effect_Entries })
+        this.movesDatas.push({ name, url, pp, power, type, effect_Entries })
       }
     },
   },

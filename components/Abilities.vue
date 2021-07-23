@@ -35,7 +35,7 @@ export default {
         const url = abilities[ability].ability.url
         const name = abilities[ability].ability.name
         const abilitieData = await this.$axios.$get(url)
-        const i = 0
+        let i = 0
         while (abilitieData.effect_entries[i].language.name != 'en') i++
 
         const effect_Entries = abilitieData.effect_entries[i].effect

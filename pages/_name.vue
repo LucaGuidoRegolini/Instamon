@@ -33,16 +33,18 @@
         </div>
         <div class="right">
           <h3>Sprits</h3>
-          <Battle
-            class="battle"
-            :defaultFront="defaultSprites.front_default"
-            :defaultBack="defaultSprites.back_default"
-          />
-          <Battle
-            class="battle"
-            :defaultFront="defaultSprites.front_shiny"
-            :defaultBack="defaultSprites.back_shiny"
-          />
+          <div class="battles">
+            <Battle
+              class="battle"
+              :defaultFront="defaultSprites.front_default"
+              :defaultBack="defaultSprites.back_default"
+            />
+            <Battle
+              class="battle"
+              :defaultFront="defaultSprites.front_shiny"
+              :defaultBack="defaultSprites.back_shiny"
+            />
+          </div>
         </div>
       </section>
     </main>
@@ -119,6 +121,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@media (max-width: 410px) {
+  .abilitiesMovies {
+    flex-direction: column-reverse;
+    .battles {
+      display: flex;
+      justify-content: center;
+    }
+  }
+}
+
 .content {
   overflow-y: scroll;
   overflow-x: hidden;
