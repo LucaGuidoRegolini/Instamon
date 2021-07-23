@@ -2,13 +2,12 @@
   <div>
     <Loading v-show="loading" class="loading" />
     <div v-show="!loading">
-      <div v-show="pokemons == undefined" class="box">
+      <div v-show="JSON.stringify(pokemons) == '{}'" class="box">
         <img src="../assets/image/icon.png" alt="" class="image" />
         <p class="text">
-          parece que não encontramos nenhum pokemon com esse nome <br />
-          não se preocupe com certeza daqui a pouco inventarão um chamado assim
-          <br />
-          mas até lá, por quê não tenta outro nome?
+          Você não tem nenhum favorito? <br />
+          Oque esta esperando? <br />
+          Começe a escolher seus favoritos agora mesmo
         </p>
       </div>
       <ul class="box" id="infinite-list">
@@ -53,6 +52,7 @@ export default {
   methods: {
     async PokemonFavDetails() {
       this.pokemons = this.$store.getters['favList/getList']
+      console.log(this.pokemons)
     },
 
     infiniScroll() {
