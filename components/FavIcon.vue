@@ -30,6 +30,10 @@ export default {
       type: Boolean,
       default: false,
     },
+    button: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     return {
@@ -45,16 +49,17 @@ export default {
   },
   methods: {
     changeMode() {
-      this.mode = !this.mode
-      if (this.mode) {
-        this.$emit('add')
-      } else {
-        this.$emit('delete')
+      if (this.button) {
+        this.mode = !this.mode
+        if (this.mode) {
+          this.$emit('add')
+        } else {
+          this.$emit('delete')
+        }
       }
     },
     floatButton() {
       if (this.float) {
-        //teste
         const elemento = document.getElementById('button')
         elemento.classList.add('floatIcon')
       }

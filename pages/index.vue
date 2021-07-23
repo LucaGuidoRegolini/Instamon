@@ -113,7 +113,7 @@ export default {
         const pokeName = pokemonAll.results[id].name
         let resp = pokeName.indexOf(value)
         this.pokemons = []
-        if (resp == 0) {
+        if (resp >= 0) {
           reslt.push(pokemonAll.results[id])
         }
       }

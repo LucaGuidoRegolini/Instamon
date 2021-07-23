@@ -1,10 +1,10 @@
 <template>
   <div class="menu">
-    <nuxt-link to="/">
-      <Button :image="true" styleButton="menu">
-        <uil-estate size="22px" class="logo" color="black" />
-      </Button>
-    </nuxt-link>
+    <!-- <nuxt-link to="/"> -->
+    <Button @click="home()" :image="true" styleButton="menu">
+      <uil-estate size="22px" class="logo" color="black" />
+    </Button>
+    <!-- </nuxt-link> -->
 
     <nuxt-link to="/favlist">
       <Button :image="true" styleButton="menu">
@@ -21,6 +21,13 @@ export default {
   components: {
     UilEstate,
     UilHeart,
+  },
+
+  methods: {
+    home() {
+      this.$store.commit('search/set', '')
+      this.$router.push('/')
+    },
   },
 }
 </script>

@@ -17,11 +17,22 @@
           @delete="deletePokemonFav()"
           :defaultMode="fav"
           :float="true"
+          :button="true"
         />
       </div>
       <div class="name">
         <h1 class="title">{{ name }}</h1>
       </div>
+      <Measure :heightM="measure.height" :weightKg="measure.weight" />
+      <Stats :stats="stats" />
+      <Battle
+        :defaultFront="defaultSprites.front_default"
+        :defaultBack="defaultSprites.back_default"
+      />
+      <Battle
+        :defaultFront="defaultSprites.front_shiny"
+        :defaultBack="defaultSprites.back_shiny"
+      />
       <p>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
         tempor incididunt ut labore et dolore magna aliqua. Adipiscing at in
@@ -100,9 +111,12 @@ export default {
       photo: '',
       types: [],
       abilities: [],
+      measure: {},
+      stats: {},
+      defaultSprites: {},
     }
   },
-  mounted() {
+  created() {
     this.PokemonDetails().then(() => {
       this.typeColor()
       this.checkFav()
@@ -119,6 +133,10 @@ export default {
       this.photo = pokemon.sprites.other['official-artwork'].front_default
       this.types = pokemon.types
       this.abilities = pokemon.abilities
+      this.stats = pokemon.stats
+      this.defaultSprites = pokemon.sprites
+      this.measure.height = pokemon.height / 10
+      this.measure.weight = pokemon.weight / 10
     },
 
     typeColor() {

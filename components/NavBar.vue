@@ -1,11 +1,9 @@
 <template>
   <div class="content">
     <nav class="navBar">
-      <nuxt-link to="/">
-        <div class="logo">
-          <h1>Instamon</h1>
-        </div>
-      </nuxt-link>
+      <div @click="home()" class="logo">
+        <h1>Instamon</h1>
+      </div>
       <div class="main">
         <div class="search">
           <Search />
@@ -16,7 +14,16 @@
   </div>
 </template>
 
-<script></script>
+<script>
+export default {
+  methods: {
+    home() {
+      this.$store.commit('search/set', '')
+      this.$router.push('/')
+    },
+  },
+}
+</script>
 
 <style lang="scss" scoped>
 @media (max-width: 343px) {
@@ -29,9 +36,6 @@
   border-bottom: 1px solid var(--line);
   height: 50px;
   width: 100%;
-  /* position: fixed;
-  top: 0;
-  z-index: 101; */
   background-color: var(--primary);
   .navBar {
     margin: 5px auto;
@@ -42,6 +46,7 @@
     .logo {
       font-family: $fontlogo;
       font-size: 34px;
+      cursor: pointer;
     }
     .main {
       flex: 1;
