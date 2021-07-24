@@ -27,8 +27,6 @@ export default {
       while (specieData.flavor_text_entries[i].language.name != 'en') i++
 
       const description = specieData.flavor_text_entries[i].flavor_text
-
-      console.log(description)
       this.description = description.replace('\f', ' ')
     },
   },

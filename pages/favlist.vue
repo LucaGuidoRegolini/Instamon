@@ -52,7 +52,6 @@ export default {
   methods: {
     async PokemonFavDetails() {
       this.pokemons = this.$store.getters['favList/getList']
-      console.log(this.pokemons)
     },
 
     infiniScroll() {

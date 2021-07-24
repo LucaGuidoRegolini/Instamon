@@ -13,8 +13,8 @@
       </div>
       <ul class="box" id="infinite-list">
         <li v-for="pokemon in pokemons" :key="pokemon.name">
-          <nuxt-link :to="pokemon.name"
-            ><PokeCard class="pokecard" :pokemon="pokemon.name"
+          <nuxt-link :to="pokemon.name" :key="$route.fullPath">
+            <PokeCard class="pokecard" :pokemon="pokemon.name"
           /></nuxt-link>
         </li>
       </ul>
@@ -51,6 +51,9 @@ export default {
         }, 1000)
       })
     },
+  },
+  created() {
+    //this.$router.go(this.$router.currentRoute)
   },
   mounted() {
     this.loading = true

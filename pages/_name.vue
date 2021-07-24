@@ -21,7 +21,7 @@
         />
       </div>
       <div class="name">
-        <h1 class="title">{{ name }}</h1>
+        <h1 id="top" class="title">{{ name }}</h1>
       </div>
       <Description :specie="specie" />
       <Measure :heightM="measure.height" :weightKg="measure.weight" />

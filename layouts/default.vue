@@ -14,10 +14,17 @@ export default {
     searchCount() {
       return this.$store.getters['search/getCont']
     },
+    changeRouer() {
+      return this.$route.name
+    },
   },
   watch: {
     searchCount() {
       this.$router.push('/')
+    },
+    changeRouer() {
+      const page = document.querySelector('#body')
+      page.scroll(0, 0)
     },
   },
 }

@@ -16,7 +16,6 @@ export const getters = {
     return state.favList
   },
   getPokemon(state, pokemonName) {
-    console.log(state.favList[pokemonName].name)
     return state.favList[pokemonName].name
   },
 }
