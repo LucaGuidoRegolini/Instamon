@@ -2,9 +2,9 @@
   <footer class="footer">
     <div class="space" />
     <p class="github center">
-      <a href="https://github.com/LucaGuidoRegolini/Bluelab">
+      <a href="https://github.com/LucaGuidoRegolini/Instamon">
         <uil-github size="20" color="white" />
-        LucaGuidoRegolini/Bluelab
+        LucaGuidoRegolini/Instamon
       </a>
     </p>
   </footer>
