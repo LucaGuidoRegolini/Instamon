@@ -47,18 +47,10 @@ export default {
         this.loading = false
       }, 1000)
     })
-    this.infiniScroll()
   },
   methods: {
     async PokemonFavDetails() {
       this.pokemons = this.$store.getters['favList/getList']
-    },
-
-    infiniScroll() {
-      const listElm = document.querySelector('#infinite-list')
-      if (listElm.scrollTop + listElm.clientHeight >= listElm.scrollHeight) {
-        this.PokemonFavDetails()
-      }
     },
   },
 }

@@ -73,8 +73,11 @@ export default {
     },
 
     infiniScroll() {
-      const listElm = document.querySelector('#infinite-list')
-      if (listElm.scrollTop + listElm.clientHeight >= listElm.scrollHeight) {
+      const listElm = document.querySelector('#body')
+      if (
+        listElm.scrollTop + listElm.clientHeight + 200 >=
+        listElm.scrollHeight
+      ) {
         this.PokemonDetails()
       }
     },
@@ -82,26 +85,27 @@ export default {
     addInfinitScroll() {
       this.lastItem = 0
       this.pokemons = []
-      const listElm = document.querySelector('#infinite-list')
+      const listElm = document.querySelector('#body')
       this.loading = true
       this.PokemonDetails().then(() => {
         setTimeout(() => {
           this.loading = false
         }, 1000)
       })
-
       listElm.addEventListener('scroll', this.infiniScroll)
     },
 
     delInfinitScroll() {
       this.lastItem = 0
       this.pokemons = []
-      const listElm = document.querySelector('#infinite-list')
+      const listElm = document.querySelector('#body')
       listElm.removeEventListener('scroll', this.infiniScroll)
     },
 
     async search(value) {
       let reslt = []
+      const page = document.querySelector('#body')
+      page.scroll(0, 0)
       if (value == '') {
         this.addInfinitScroll()
         this.searchTerm = ''
