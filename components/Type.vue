@@ -4,7 +4,7 @@
       :style="`background:${color};width:${size}px;height:${size}px`"
       class="icon"
     >
-      <img :src="require(`../assets/svgs/${pokeType}.svg`)" />
+      <img :src="require(`../assets/svgs/${pokeType}.svg`)" alt="pokeType" />
     </div>
   </div>
 </template>

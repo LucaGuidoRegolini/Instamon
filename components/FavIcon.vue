@@ -5,8 +5,16 @@
     @click="changeMode()"
   >
     <div :style="'background:' + color" class="icon" id="button">
-      <img v-show="!mode" :src="require(`../assets/image/heart1.png`)" />
-      <img v-show="mode" :src="require(`../assets/image/heart2.png`)" />
+      <img
+        v-show="!mode"
+        :src="require(`../assets/image/heart1.png`)"
+        alt="inactive"
+      />
+      <img
+        v-show="mode"
+        :src="require(`../assets/image/heart2.png`)"
+        alt="active"
+      />
     </div>
   </div>
 </template>
