@@ -1,7 +1,10 @@
 <template>
-  <div>
+  <div id="application">
     <NavBar id="navbar" />
-    <Nuxt id="body" />
+    <main id="body">
+      <Nuxt id="main" />
+      <Footer id="footer" />
+    </main>
   </div>
 </template>
 
@@ -23,5 +26,16 @@ export default {
 <style lang="scss" scoped>
 * {
   font-family: Roboto;
+}
+#application {
+  #body {
+    overflow-y: scroll;
+    overflow-x: hidden;
+    height: 100vh;
+    #main {
+      min-height: 100vh;
+      background-color: var(--primarydark);
+    }
+  }
 }
 </style>

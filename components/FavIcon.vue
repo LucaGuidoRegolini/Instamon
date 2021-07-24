@@ -104,15 +104,11 @@ export default {
 }
 
 .icon {
-  //border-radius: 100%;
-  //border: 1px solid var(--linedark);
   height: 100%;
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  //box-shadow: 0px 0px 8px 1px var(--linedark);
-  //transition: 200ms all;
 
   img {
     height: 70%;

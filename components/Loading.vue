@@ -11,7 +11,7 @@ export default {}
 
 <style lang="scss" scoped>
 .body {
-  width: 100vw;
+  width: 100%;
   height: 100vh;
   z-index: 100;
   display: flex;
@@ -23,7 +23,6 @@ export default {}
   .text {
     text-align: center;
     color: var(--linedark);
-    background-color: var(--primarydark);
   }
 }
 </style>

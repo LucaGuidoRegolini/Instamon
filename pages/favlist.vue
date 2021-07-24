@@ -97,13 +97,11 @@ export default {
 
 div {
   .box {
-    background-color: var(--primarydark);
     padding: 20px 0px 20px;
     display: flex;
     flex-direction: column;
     place-items: center;
-    overflow-y: scroll;
-    height: 96vh;
+    height: 100%;
     width: 100%;
     &::-webkit-scrollbar {
       width: 0px;

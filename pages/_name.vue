@@ -132,16 +132,10 @@ export default {
 }
 
 .content {
-  overflow-y: scroll;
-  overflow-x: hidden;
-  background-color: var(--primarydark);
   display: flex;
   align-items: center;
   flex-direction: column;
-  height: 95vh;
-  padding-bottom: 400px;
   .main {
-    height: 600px;
     width: 100%;
     max-width: 600px;
     margin-top: 00px;
