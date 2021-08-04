@@ -1,4 +1,6 @@
 export default {
+  //ssr: false,
+
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     title: 'Instamon',
@@ -53,7 +55,7 @@ export default {
   apollo: {
     clientConfigs: {
       default: {
-        httpEndpoint: 'http://localhost:4000',
+        httpEndpoint: 'https://beta.pokeapi.co/graphql/v1beta',
       },
     },
   },

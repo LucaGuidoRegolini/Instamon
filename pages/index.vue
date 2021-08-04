@@ -23,6 +23,7 @@
 </template>
 
 <script>
+import gql from 'graphql-tag'
 export default {
   head() {
     return {
@@ -63,13 +64,33 @@ export default {
       }, 1000)
     })
   },
+
+  apollo: {
+    PokemonsDetails: {
+      query: gql`
+        query getPokemonsDetails($offset: Int) {
+          PokemonsDetails: pokemon_v2_pokemon(limit: 10, offset: $offset) {
+            name
+          }
+        }
+      `,
+      variables() {
+        return {
+          offset: this.lastItem,
+        }
+      },
+    },
+  },
+
   methods: {
     async PokemonDetails() {
-      const pokemons = await this.$axios.$get(
-        `/pokemon?limit=10&offset=` + this.lastItem
-      )
+      console.log(this.PokemonsDetails)
+
+      // const pokemons = await this.$axios.$get(
+      //   `/pokemon?limit=10&offset=` + this.lastItem
+      // )
       this.lastItem += 10
-      this.pokemons = this.pokemons.concat(pokemons.results)
+      this.pokemons = this.pokemons.concat(this.PokemonsDetails)
     },
 
     infiniScroll() {
